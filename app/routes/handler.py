@@ -1,6 +1,8 @@
-from flask import Blueprint, request, jsonify
+import json
+from flask import Blueprint, request, jsonify, current_app
 from ..schemas.schema1 import schema1
 from ..utils.validator import validate_schema
+from ..utils.s3 import s3
 
 bp = Blueprint('handler', __name__)
 
@@ -11,5 +13,18 @@ def handle_post():
     if errors:
         return jsonify({"errors": errors}), 400
 
-    # Process the request
-    return jsonify({"message": "Handler1 processed successfully", "sent_json": data}), 200
+    try:
+        s3_client = s3.get_client()
+
+        event_id = data['event_id']
+        s3_bucket = current_app.config['S3_BUCKET']
+        s3_key = current_app.config['S3_KEY']
+
+        s3_client.put_object(Bucket=s3_bucket, Key=f'{s3_key}/{event_id}.json', Body=json.dumps(data))
+
+        return jsonify({"message": "Request processed successfully", "sent_json": data}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+

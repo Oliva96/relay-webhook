@@ -1,5 +1,5 @@
 import os
 
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key')
-    # Add other configurations here
+    S3_BUCKET = os.getenv('S3_BUCKET')
+    S3_KEY = os.getenv('S3_KEY')

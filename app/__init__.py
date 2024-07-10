@@ -1,4 +1,5 @@
 from flask import Flask
+from .utils.s3 import s3
 
 def create_app():
     app = Flask(__name__)
@@ -11,6 +12,6 @@ def create_app():
     def hello_world():
         return 'Hello, World!'
 
-    #TODO: Create s3 connection
+    s3.connect()
 
     return app
