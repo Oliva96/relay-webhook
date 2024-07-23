@@ -3,10 +3,12 @@ from flask import Blueprint, request, jsonify, current_app
 from ..schemas.schema1 import schema1
 from ..utils.validator import validate_schema
 from ..utils.s3 import s3
+from ..utils.decorators import login_required
 
 bp = Blueprint('handler', __name__)
 
 @bp.route('/handler', methods=['POST'])
+@login_required
 def handle_post():
     data = request.json
     errors = validate_schema(data, schema1)

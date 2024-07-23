@@ -1,3 +1,7 @@
 Flask
 jsonschema
 boto3
+authlib
+requests
+PyJWT
+Werkzeug
