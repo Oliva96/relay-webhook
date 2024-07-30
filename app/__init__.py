@@ -1,5 +1,7 @@
 from flask import Flask
-from .utils.s3 import s3
+
+from .utils.db import DB
+from .utils.s3 import S3
 from .routes import init_routes
 
 def create_app():
@@ -15,7 +17,5 @@ def create_app():
     @app.route('/')
     def hello_world():
         return 'Hello, World!'
-
-    s3.connect()
 
     return app

@@ -1,7 +1,8 @@
 import boto3
 
-class s3:
+class S3:
     __client = None
+
     @classmethod
     def connect(cls):
         cls.__client = boto3.client('s3')
@@ -12,4 +13,4 @@ class s3:
         if cls.__client:
             return cls.__client
         else:
-            return s3.connect()
+            return cls.connect()

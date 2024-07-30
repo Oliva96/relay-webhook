@@ -5,3 +5,4 @@ authlib
 requests
 PyJWT
 Werkzeug
+psycopg2-binary
