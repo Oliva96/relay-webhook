@@ -45,3 +45,5 @@ class DB:
         finally:
             cursor.close()
             conn.close()
+
+            
